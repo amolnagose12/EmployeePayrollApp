@@ -167,9 +167,16 @@ select {
     text-align: center;
   }
   
-  .resetButton {
-    margin-right: 10px;
-}
+    .resetButton {
+        margin-right: 10px;
+    }
+
+    error-output {
+        margin-left: 10px;
+        font-size: 15px;
+        font-style: italic;
+        color: rgb(231, 66, 66);
+    }
 
 @media only screen and (max-width:600px) {
     .form {
