@@ -157,7 +157,8 @@ select {
   }
   
   .submitButton {
-    background-color: #f8f8f821;
+    border: none;
+    border: 1px solid grey;
     margin-right: 30px;
   }
   
