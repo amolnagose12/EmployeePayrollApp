@@ -51,49 +51,44 @@ class EmployeePayrollData {
         this._salary = salary;
     }
 
-    getTodayDate=()=>{
-        var objToday = new Date(),
-        dayOfMonth = objToday.getDate(),
-        months = new Array('jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sep', 'oct', 'nov', 'dec'),
-        curMonth = months[objToday.getMonth()],
-        curYear = objToday.getFullYear();
-        return dayOfMonth + "-" + curMonth + "-" + curYear;
-    }
-
     get startDate() {
         return this._startDate;
     }
-
+    
     set startDate(startDate){
         let now = new Date();
-        if (startDate > now) throw new Error("Start Date is a Future Date!");
+        if (startDate > now) {
+            throw new Error("Start Date is a Future Date!");
+        }
         var diff = Math.abs(now.getTime() - startDate.getTime());
-        if (diff / (1000 * 60 * 60 * 24) > 30) throw new Error("Start date is beyond 30 days");
-        this._startDate = startDate;
+        if (diff / (1000 * 60 * 60 * 24) > 30) {
+            throw new Error("Start date is beyond 30 days");
+        }
+     this._startDate = startDate;  
+     console.log("startDate",startDate)    
     }
     
     get notes() {
         return this._notes;
     }
-
+    
     set notes(notes) {
         this._notes = notes;
     }
 
     toString() {
-        const option = { day: "numeric", month: "short", year: "numeric" };
-        const empDate = !this.startDate ?
-            "undefined" :
-            this.startDate.toLocaleDateString("en-GB", option);
+        const empDate = !this.startDate ? "undefined" :
+                        this.startDate.toDateString("en-US", {year: 'numeric', month: '2-digit', day: '2-digit'});
+                        
         return (
-            "id=" + this.id +
-            ",name= '" + this.name +
-            ",gender= '" + this.gender +
-            ",profilePic= '" + this.profilePic +
-            ",department=" + this.department +
-            ",salary=" + this.salary +
-            ",startDate=" + empDate +
-            ",note=" + this.note
+            "name= " + this.name +
+            ", gender= " + this.gender +
+            ", profilePic= " + this.profilePic +
+            ", department=" + this.department +
+            ", salary=" + this.salary +
+            ", startDate=" + empDate +
+            ", note='" + this.note
         );
+        
     }
 }

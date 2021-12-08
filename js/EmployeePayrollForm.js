@@ -1,16 +1,15 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     const name = document.querySelector('#name');
-    const textError = document.querySelector('.text-error');
     name.addEventListener('input', function() {
         if (name.value.length == 0) {
-            textError.textContent = " ";
+            setTextValue('.text-error',"");
             return;
         }
         try {
             (new EmployeePayrollData()).name = name.value;
-            textError.textContent = " ";
+            setTextValue('.text-error',"");
         } catch (e) {
-            textError.textContent = e;
+            setTextValue('.text-error',e);
         }
     });
 
@@ -19,6 +18,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
     output.textContent = salary.value;
     salary.addEventListener('input', function() {
         output.textContent = salary.value;
+    });
+
+    const date = document.querySelector('#date');
+    console.log(date);
+    date.addEventListener('input',function(){
+        let startDate = getInputValueById('#day')+" "+
+                        getInputValueById('#month')+" "+
+                        getInputValueById('#year');
+        try{
+            (new EmployeePayrollData()).startDate= new Date(Date.parse(startDate));
+            setTextValue('.dates-error', "");
+        }catch(e){
+            setTextValue('.dates-error',e);
+        }
     });
 
 });
@@ -92,13 +105,13 @@ function createAndUpdateStorage(employeePayrollData) {
 
 function resetButton() {
     setValue('#name', '');
-    setValue('#salary', '');
+    setValue('#salary', '400000');
     setValue('#notes', '');
     setValue('#day', '1');
     setValue('#month', 'January');
     setValue('#year', '2021');
     setTextValue('.text-error', '');
-    setTextValue('.date-error', '');
+    setTextValue('.dates-error', '');
     unsetSelectedValues('[name=profile]');
     unsetSelectedValues('[name=gender]');
     unsetSelectedValues('[name=department]');
