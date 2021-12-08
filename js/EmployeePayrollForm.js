@@ -68,7 +68,9 @@ function save(event) {
     event.stopPropagation();
 
     try {
-       let EmployeePayrollData= createEmployeePayroll();
+       let employeePayrollData= createEmployeePayroll();
+       createAndUpdateStorage(employeePayrollData);
+        alert("Data Stored With name" + employeePayrollData.name);
     } catch (e) {
         return;
     }
@@ -113,4 +115,14 @@ const getInputValueById=(id)=>{
 const getInputElementValue=(id)=>{
     let value=document.getElementById(id).value;
     return value;
+}
+
+function createAndUpdateStorage(employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if (employeePayrollList == undefined) {
+        employeePayrollList = [employeePayrollData];
+    } else {
+        employeePayrollList.push(employeePayrollData);
+    }
+    localStorage.setItem("EmployeePayrollListList", JSON.stringify(employeePayrollList));
 }
