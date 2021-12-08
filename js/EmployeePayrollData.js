@@ -81,7 +81,8 @@ class EmployeePayrollData {
                         this.startDate.toDateString("en-US", {year: 'numeric', month: '2-digit', day: '2-digit'});
                         
         return (
-            "name= " + this.name +
+            "id= "+this.id+
+            ", name= " + this.name +
             ", gender= " + this.gender +
             ", profilePic= " + this.profilePic +
             ", department=" + this.department +
