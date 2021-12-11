@@ -48,7 +48,9 @@ const getDeptHtml = (deptList) => {
 }
 
 const remove=(node)=>{
-    let empPayrollData=empPayrollList.find(empData => empData._id==node._id);
+    const empPayrollData=empPayrollList.find(empData => empData._id==node.id);
+    console.log(empPayrollList.find(empData => empData._id));
+    console.log(node.id)
     if(!empPayrollData) return;
     const index=empPayrollList
                 .map(empData => empData._id)
@@ -60,7 +62,7 @@ const remove=(node)=>{
 }
 
 const update = (data) => {
-    let employeePayrollData = empPayrollList.find(empData => empData._id == data._id);
+    let employeePayrollData = empPayrollList.find(empData => empData._id == data.id);
     if (!employeePayrollData)
         return;
     localStorage.setItem('editEmp', JSON.stringify(employeePayrollData));
